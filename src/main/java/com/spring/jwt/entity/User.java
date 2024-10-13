@@ -19,6 +19,7 @@ public class User {
 
     @Id
     @Column(name = "user_id", nullable = false)
+
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "user_id_generator")
     @SequenceGenerator(name = "user_id_generator", initialValue = 1000)
     private Integer id;
@@ -30,13 +31,14 @@ public class User {
 
     @Column(name = "mobile_no")
     private String mobileNo;
-
+    @JsonIgnore
     @Column(name = "password", nullable = false, length = 250)
     private String password;
 
     private String referenceId;
 
     private Float totalBalnce;
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
